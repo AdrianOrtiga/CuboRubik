@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+		<link rel="stylesheet" type="text/css" href="cubo.css">
+
 		<meta charset="utf-8" />
 		<title>Cubo Rubik</title>
 	</head>
 	<body>
-		<h1>Soy capaz de resolver el cubo de Rubik</h1>
+		<section id="main-container">
+		<h1 class="center-align">Soy capaz de resolver el cubo de Rubik</h1>
 		<canvas width="300" height="400" id="area_dibujo">
 		</canvas>
 		<br/>
-		<p> Ejes <br />
-		 x <input type="radio" name="eje" id="eje_x" onclick="check(this.id)" value="false" /> 
-		 y <input type="radio" name="eje" id="eje_y" onclick="check(this.id)" value="false" />
-		 z <input type="radio" name="eje" id="eje_z" onclick="check(this.id)" value="false" /></p>
+			<p> Ejes <br />
+			 x <input type="radio" name="eje" id="eje_x" onclick="check(this.id)" value="false" /> 
+			 y <input type="radio" name="eje" id="eje_y" onclick="check(this.id)" value="false" />
+			 z <input type="radio" name="eje" id="eje_z" onclick="check(this.id)" value="false" /></p>
 
-		 <p> Nivel <br />
-		 1 <input type="radio" name="Nivel" id="nivel_1" onclick="check(this.id)" value="false" /> 
-		 2 <input type="radio" name="Nivel" id="nivel_2" onclick="check(this.id)" value="false" />
-		 3 <input type="radio" name="Nivel" id="nivel_3" onclick="check(this.id)" value="false" /></p>
-		 <p><input type="button" id="botonRotarAr" value="  Rotar /\  " /> <br />
-		 <input type="button" id="botonRotarAb" value="  Rotar \/  " /></p>
+			 <p> Nivel <br />
+			 1 <input type="radio" name="Nivel" id="nivel_1" onclick="check(this.id)" value="false" /> 
+			 2 <input type="radio" name="Nivel" id="nivel_2" onclick="check(this.id)" value="false" />
+			 3 <input type="radio" name="Nivel" id="nivel_3" onclick="check(this.id)" value="false" /></p>
+			 <p><input type="button" id="botonRotarAr" value="  Rotar /\  " /> <br />
+			 <input type="button" id="botonRotarAb" value="  Rotar \/  " /></p>
+    	</setion>
 		<script type="text/javascript" src="cubo.js">
 		</script>
 	</body>
