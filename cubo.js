@@ -208,8 +208,24 @@ class CuboRubik6Caras
 
 	rotarExteriorDerecha()
 	{
-		
-	}
+		var h = 2;
+		var h1 = 0;
+		var j2 = 2;
+		var aux;
+
+		for (var j = 0; j < 3; j++) 
+		{
+			aux 				 = this.cara[4][j][h];
+			this.cara[4][j][h] 	 = this.cara[2][h][j2];
+			this.cara[2][h][j2]  = this.cara[1][j2][h1];
+			this.cara[1][j2][h1] = this.cara[3][h1][j]; 
+			this.cara[3][h1][j]  = aux;	
+
+			j2 = j2 - 1;						
+		}
+
+		this.rotarCara(5, "left");
+	}	
 
 	rotarCentroIzquierda()
 	{
@@ -250,11 +266,25 @@ class CuboRubik6Caras
 		}
 	}
 
-
-//---------------------------------VOY POR AQUÍ TENGO QUE HACER
 	rotarExteriorIzquierda()
 	{
+		var h = 2;
+		var h1 = 0;
+		var j2 = 2;
+		var aux;
 
+		for (var j = 0; j < 3; j++) 
+		{
+			aux 				 = this.cara[1][j2][h1];
+			this.cara[1][j2][h1] = this.cara[2][h][j2];
+			this.cara[2][h][j2]  = this.cara[4][j][h];
+			this.cara[4][j][h] 	 = this.cara[3][h1][j]; 
+			this.cara[3][h1][j]  = aux;	
+
+			j2 = j2 - 1;						
+		}
+
+		this.rotarCara(5, "right");
 	}
 
 
@@ -466,7 +496,7 @@ function moverCuboArriba()
 		}
 		else if(nivel_3.value == "true")
 		{
-			
+			cubo1.rotarExteriorDerecha();
 		}
 	}
 	else if (eje_z.value == "true")
@@ -517,7 +547,7 @@ function moverCuboAbajo()
 		}
 		else if(nivel_3.value == "true")
 		{
-			
+			cubo1.rotarExteriorIzquierda();
 		}
 	}
 	else if (eje_z.value == "true")
