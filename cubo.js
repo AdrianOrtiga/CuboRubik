@@ -107,6 +107,20 @@ class CuboRubik6Caras
 		lienzo.closePath();
 	}
 
+	dibujarLinea(color, xinicial, yinicial, xfinal, yfinal, grosor)
+	{
+		var d = document.getElementById("area_dibujo");
+		var lienzo = d.getContext("2d");
+
+		lienzo.beginPath();
+		lienzo.lineWidth = grosor;
+		lienzo.strokeStyle = color;
+		lienzo.moveTo(xinicial,yinicial);
+		lienzo.lineTo(xfinal,yfinal);
+		lienzo.stroke();
+		lienzo.closePath();
+	}
+
 	dibujarMargenes()
 	{
 		var m = document.getElementById("area_dibujo");
@@ -117,7 +131,7 @@ class CuboRubik6Caras
 		this.dibujarLinea(colorcito,1,1,m.width,1);
 		this.dibujarLinea(colorcito,1,m.height,m.width,m.height);
 	}
-
+//------------------------------- EJE X -----------------------------
 	moverFilaArriba(nFila)
 	{
 		var j = nFila;
@@ -165,8 +179,7 @@ class CuboRubik6Caras
 			this.rotarCara(3,"right");
 		}
 	}
-
-
+//------------------------------- EJE Y -----------------------------
 	rotarCentroDerecha()
 	{
 		var h = 0;
@@ -286,99 +299,64 @@ class CuboRubik6Caras
 
 		this.rotarCara(5, "right");
 	}
-
-
-
-	moverFilaDerecha()
+//------------------------------- EJE Z -----------------------------
+	moverAlasDerecha(nFila)
 	{
-		var h = 1;
+		var h = nFila;
+		var h2 = 2 - h;
+		var j2 = 2;
 		var aux;
 
 		for (var j = 0; j < 3; j++) 
 		{
-			aux 				= this.cara[0][j][h];
-			this.cara[0][j][h] 	= this.cara[3][j][h];
-			this.cara[3][j][h] 	= this.cara[5][j][h];
-			this.cara[5][j][h] 	= this.cara[2][j][h]; 
-			this.cara[2][j][h] 	= aux;							
+			aux 				 = this.cara[0][j][h];
+			this.cara[0][j][h] 	 = this.cara[3][j][h];
+			this.cara[3][j][h] 	 = this.cara[5][j2][h2];
+			this.cara[5][j2][h2] = this.cara[2][j][h]; 
+			this.cara[2][j][h] 	 = aux;
+
+			j2 = j2 - 1;							
+		}
+
+		if(nFila == 0)
+		{
+			this.rotarCara(1, "left");
+		}
+		else if (nFila == 2)
+		{
+			this.rotarCara(4, "right");
 		}
 	}
 
-	moverFilaIzquierda()
+	moverAlasIzquierda(nFila)
 	{
-		var h = 1;
+		var h = nFila;
+		var h2 = 2 - h;
+		var j2 = 2;
 		var aux;
 
 		for (var j = 0; j < 3; j++) 
 		{
-			aux 				= this.cara[0][j][h];
-			this.cara[0][j][h] 	= this.cara[2][j][h];
-			this.cara[2][j][h] 	= this.cara[5][j][h];
-			this.cara[5][j][h] 	= this.cara[3][j][h]; 
-			this.cara[3][j][h] 	= aux;							
+			aux 				 = this.cara[0][j][h];
+			this.cara[0][j][h] 	 = this.cara[2][j][h];
+			this.cara[2][j][h] 	 = this.cara[5][j2][h2];
+			this.cara[5][j2][h2] = this.cara[3][j][h]; 
+			this.cara[3][j][h] 	 = aux;
+
+			j2 = j2 -1;							
 		}
-	}
 
-	moverFilaDerecha9()
-	{
-		var h = 0;
-		var aux;
-
-		for (var j = 0; j < 3; j++) 
+		if(nFila == 0)
 		{
-			aux 				= this.cara[0][j][h];
-			this.cara[0][j][h] 	= this.cara[3][j][h];
-			this.cara[3][j][h] 	= this.cara[5][j][h];
-			this.cara[5][j][h] 	= this.cara[2][j][h]; 
-			this.cara[2][j][h] 	= aux;							
+			this.rotarCara(1, "right");
 		}
-	}
-
-	moverFilaIzquierda7()
-	{
-		var h = 0;
-		var aux;
-
-		for (var j = 0; j < 3; j++) 
+		else if (nFila == 2)
 		{
-			aux 				= this.cara[0][j][h];
-			this.cara[0][j][h] 	= this.cara[2][j][h];
-			this.cara[2][j][h] 	= this.cara[5][j][h];
-			this.cara[5][j][h] 	= this.cara[3][j][h]; 
-			this.cara[3][j][h] 	= aux;							
+			this.rotarCara(4, "left");
 		}
 	}
 
-	moverFilaDerecha3()
-	{
-		var h = 2;
-		var aux;
-
-		for (var j = 0; j < 3; j++) 
-		{
-			aux 				= this.cara[0][j][h];
-			this.cara[0][j][h] 	= this.cara[3][j][h];
-			this.cara[3][j][h] 	= this.cara[5][j][h];
-			this.cara[5][j][h] 	= this.cara[2][j][h]; 
-			this.cara[2][j][h] 	= aux;							
-		}
-	}
-
-	moverFilaIzquierda1()
-	{
-		var h = 2;
-		var aux;
-
-		for (var j = 0; j < 3; j++) 
-		{
-			aux 				= this.cara[0][j][h];
-			this.cara[0][j][h] 	= this.cara[2][j][h];
-			this.cara[2][j][h] 	= this.cara[5][j][h];
-			this.cara[5][j][h] 	= this.cara[3][j][h]; 
-			this.cara[3][j][h] 	= aux;							
-		}
-	}
-
+// --------------------------------------------------------------
 	rotarCara(numCara, opcion)
 	{
 		var h = 0;
@@ -460,9 +438,6 @@ var nivel_3 = document.getElementById("nivel_3");
 var boton 	= document.getElementById("botonRotarAr");
 var boton2 	= document.getElementById("botonRotarAb");
 
-
-
-document.addEventListener("keyup",dibujarTeclado);
 boton.addEventListener("click", moverCuboArriba);
 boton2.addEventListener("click", moverCuboAbajo);
 
@@ -503,15 +478,15 @@ function moverCuboArriba()
 	{
 		if (nivel_1.value == "true")
 		{
-
+			cubo1.moverAlasDerecha(0);
 		}
 		else if(nivel_2.value == "true")
 		{
-
+			cubo1.moverAlasDerecha(1);
 		}
 		else if(nivel_3.value == "true")
 		{
-			
+			cubo1.moverAlasDerecha(2);
 		}
 	}
 
@@ -554,72 +529,18 @@ function moverCuboAbajo()
 	{
 		if (nivel_1.value == "true")
 		{
-			
+			cubo1.moverAlasIzquierda(0);
 		}
 		else if(nivel_2.value == "true")
 		{
-
+			cubo1.moverAlasIzquierda(1);
 		}
 		else if(nivel_3.value == "true")
 		{
-			
+			cubo1.moverAlasIzquierda(2);
 		}
 	}
 
-	cubo1.mostarCubo();
-}
-
-function dibujarTeclado(evento)
-{	
-	switch(evento.keyCode)
-	{
-		case teclas.UP:
-			cubo1.moverFilaArriba();			
-		break;
-		case teclas.DOWN:
-			cubo1.moverFilaAbajo();		
-		break;
-		case teclas.UP:
-			cubo1.moverFilaArribaIzquirda();			
-		break;
-		case teclas.DOWN:
-			cubo1.moverFilaArribaDerecha();		
-		break;
-		case teclas.RIGHT:
-			cubo1.rotarFilaDerecha(1);
-		break;
-		case teclas.LEFT:
-			cubo1.rotarFilaIzquierda(1);	
-		break;
-		case teclas.SEIS:
-			cubo1.moverFilaDerecha(1);	
-		break;
-		case teclas.CUATRO:
-			cubo1.moverFilaIzquierda(1);	
-		break;
-		case teclas.D:
-			cubo1.rotarCentroDerecha();
-		break;
-		case teclas.I:
-			cubo1.rotarCentroIzquierda();
-		break;
-		case teclas.NUEVE:
-			cubo1.moverFilaDerecha9();
-		break;
-		case teclas.SIETE:
-			cubo1.moverFilaIzquierda7();
-		break;
-		case teclas.TRES:
-			cubo1.moverFilaDerecha3();
-		break;
-		case teclas.UNO:
-			cubo1.moverFilaIzquierda1();
-		break;
-		default:
-			console.log(evento.keyCode);
-		break;
-	}
-	
 	cubo1.mostarCubo();
 }
 
