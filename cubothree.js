@@ -14,6 +14,15 @@ scene.add( cube );
 camera.position.z = 5;
 camera.position.y = -0.99;
 
+if (Detector.webgl) {
+    init();
+    animate();
+} else {
+    var warning = Detector.getWebGLErrorMessage();
+    document.getElementById('container').appendChild(warning);
+}
+
+render();
 
 function render() 
 {
@@ -23,7 +32,4 @@ function render()
 	requestAnimationFrame( render );
 	renderer.render( scene, camera );
 }
-
-render();
-
 
