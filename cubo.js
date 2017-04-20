@@ -406,6 +406,78 @@ class CuboRubik6Caras
 		}
 
 	}
+
+	removerCubo(iteraciones)
+	{
+		var max = 8;
+		var min = 0;
+		var x;
+
+		for (var i = 0; i < iteraciones; i++) 
+		{
+			x = Math.round(Math.random() * (max - min)) + min;
+			switch(x)
+			{
+				case 0:
+					cubo1.moverFilaArriba(0);
+				break;
+				case 1:
+					cubo1.moverFilaArriba(1);
+				break;
+				case 2:
+					cubo1.moverFilaArriba(2);
+				break;
+				case 3:
+					cubo1.rotarCentroDerecha();
+				break;
+				case 4:
+					cubo1.rotarMedioDerecha();
+				break;
+				case 5:
+					cubo1.rotarExteriorDerecha();
+				break;
+				case 6:
+					cubo1.moverAlasDerecha(0);
+				break;
+				case 7:
+					cubo1.moverAlasDerecha(1);
+				break;
+				case 8:
+					cubo1.moverAlasDerecha(2);
+				break;
+			}	
+		}
+	}
+
+	resolverCubo()
+	{
+		var resuelto = true
+
+		for (var i = 0; i < 6 && resuelto; i++) 
+		{
+			for (var j = 0; j < 3 && resuelto; j++) 
+			{
+				for (var h = 0; h < 3 && resuelto; h++) 
+				{
+					if (this.cara[i][0][0] != this.cara[i][j][h])
+					{	
+					 	resuelto = false;
+					}
+				}
+			}
+		}
+		
+		if (resuelto)
+		{
+			alert("Ya esta resuelto ¬¬");
+		}
+		else
+		{
+			alert("¡Voy a resolver el cubo!");
+		// Paso 1 cruz superior
+
+		}
+	}
 }
 
 var teclas = {
@@ -437,9 +509,13 @@ var nivel_2 = document.getElementById("nivel_2");
 var nivel_3 = document.getElementById("nivel_3");
 var boton 	= document.getElementById("botonRotarAr");
 var boton2 	= document.getElementById("botonRotarAb");
+var boton3 	= document.getElementById("botonResolver");
+var boton4 	= document.getElementById("botonRemover");
 
 boton.addEventListener("click", moverCuboArriba);
 boton2.addEventListener("click", moverCuboAbajo);
+boton3.addEventListener("click", resolverPuzle);
+boton4.addEventListener("click", removerPuzle);
 
 function moverCuboArriba()
 {
@@ -585,12 +661,14 @@ function check(identificador)
 	}
 }	
 
+function resolverPuzle(){
 
+	cubo1.resolverCubo();
+}
 
+function removerPuzle(){
 
-
-
-
-
-
+	cubo1.removerCubo(100);
+	cubo1.mostarCubo();
+}
 
